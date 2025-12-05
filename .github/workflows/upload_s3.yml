@@ -28,5 +28,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
           
-      - name: Upload ssnowflake_iceberg_polaris.yaml to S3
+      - name: Upload snowflake_iceberg_polaris.yaml to S3
         run: aws s3 cp /home/runner/work/Snowflake_Iceberg_Polaris/Snowflake_Iceberg_Polaris/snowflake_iceberg_polaris.yaml s3://sharkech-public/misc-public/snowflake_iceberg_polaris.yaml
+
+      - name: Upload snowflake_iceberg_polaris_iam_update.yaml to S3
+        run: aws s3 cp /home/runner/work/Snowflake_Iceberg_Polaris/Snowflake_Iceberg_Polaris/snowflake_iceberg_polaris_iam_update.yaml s3://sharkech-public/misc-public/snowflake_iceberg_polaris_iam_update.yaml
