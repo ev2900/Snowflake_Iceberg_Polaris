@@ -13,3 +13,4 @@ You can test this integration. Begin by deploying the CloudFormation stack below
 
 [![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=snowflake-iceberg-polaris&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris.yaml)
 
+```https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris_iam_update.yaml```
