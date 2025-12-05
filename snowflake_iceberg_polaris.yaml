@@ -30,12 +30,12 @@ Resources:
                 Resource: '*'
 
 Outputs:
-  StorageAwsRoleArn:
-    Description: STORAGE_AWS_ROLE_ARN when creating the external volume
+  SnowflakePolarisIAMRoleArn:
+    Description: Use this for s3 role ARN when creating the catalog in Polaris
     Value: !GetAtt SnowflakePolarisIAMRole.Arn
 
   StorageBaseUri:
-    Description: Use this for STORAGE_BASE_URL when creating the external volume
+    Description: Use this default base location when creating the catalog in Polaris
     Value: !Join 
       - ''
       - - 's3://'
