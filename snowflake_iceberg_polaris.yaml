@@ -1,1 +1,43 @@
+Description: CloudFormation Deployment for reading/writing to Iceberg tables from Snowflake via. Polaris and reading via. GDC catalog federation
+Resources:
+  #
+  # S3 Bucket
+  #
+  S3:
+    Type: AWS::S3::Bucket
+  
+  #
+  # Snowflake IAM Role
+  # 
+  SnowflakePolarisIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: "arn:aws:iam::535002871755:root" # replace with 
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: Admin
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - '*'
+                Resource: '*'
 
+Outputs:
+  StorageAwsRoleArn:
+    Description: STORAGE_AWS_ROLE_ARN when creating the external volume
+    Value: !GetAtt SnowflakeHorizonIAMRole.Arn
+
+  StorageBaseUri:
+    Description: Use this for STORAGE_BASE_URL when creating the external volume
+    Value: !Join 
+      - ''
+      - - 's3://'
+        - !Ref S3
+        - '/iceberg/'
