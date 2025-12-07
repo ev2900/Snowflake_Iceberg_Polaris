@@ -7,9 +7,32 @@ Resources:
     Type: AWS::S3::Bucket
   
   #
-  # Snowflake IAM Role
+  # Snowflake Polaris Catalog IAM Role
   # 
-  SnowflakePolarisIAMRole:
+  SnowflakePolarisCatalogIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: "arn:aws:iam::535002871755:root" # replace with 
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: Admin
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - '*'
+                Resource: '*'
+  
+  #
+  # Snowflake External Volume Storage IAM Role
+  #
+  SnowflakePolarisStorageIAMRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -30,9 +53,13 @@ Resources:
                 Resource: '*'
 
 Outputs:
-  SnowflakePolarisIAMRoleArn:
+  SnowflakePolarisCatalogIAMRole:
     Description: Use this for s3 role ARN when creating the catalog in Polaris
-    Value: !GetAtt SnowflakePolarisIAMRole.Arn
+    Value: !GetAtt SnowflakePolarisCatalogIAMRole.Arn
+
+  SnowflakePolarisStorageIAMRole:
+    Description: Use this for s3 role ARN when creating the catalog in Polaris
+    Value: !GetAtt SnowflakePolarisStorageIAMRole.Arn
 
   StorageBaseUri:
     Description: Use this default base location when creating the catalog in Polaris
