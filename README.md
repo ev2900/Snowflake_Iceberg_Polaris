@@ -125,7 +125,9 @@ Select Connections, +Connection
 
 Name the catalog ```CATALOG_CONNECTION```, select Create new principal role, Name the new principal ```CATALOG_PRINCIPAL```
 
-<img width="500" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/create_catalog.png">
+<img width="400" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/create_catalog.png">
+
+The next screen will show you the client id and secrete. Copy and paste those as the values of the OAUTH_CLIENT_ID and OAUTH_CLIENT_SECRET in the SQL statement below
 
 ### Create a catalog integration for Polaris
 
@@ -148,3 +150,5 @@ CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS
   ) 
   ENABLED=TRUE;
 ```
+
+### 
