@@ -218,3 +218,27 @@ This will create an Iceberg table that is registerd with Horizon but also is rep
 
 ## Lake Formation / Glue Data Catalog Federation Set Up
 
+### Create secrets manager secret
+
+To federate to the Snowflake Open Catalog Account, you need to store the client secret in AWS secret manager. For testing purposes you can use the same client secret value you used to create the catalog intergration in Snowflake.
+
+Replace the <> sections and run the following via. AWS CLI. 
+
+*If you do not have an AWS CLI enviorment set up Cloudshell via. AWS console can be an easy to run these* 
+
+```
+aws secretsmanager create-secret \
+--name SnowflakeClientSecret \
+--description "Snowflake secret" \
+--secret-string '{"USER_MANAGED_CLIENT_APPLICATION_CLIENT_SECRET": "<client-secret>"}' \
+--region '<region ex. us-west-2>'
+```
+
+The aws CLI will return the ARN of the secret. Copy this down, you will need it in the next step.
+
+### Create Lake Formation catalog federation connection
+
+```
+
+```
+
