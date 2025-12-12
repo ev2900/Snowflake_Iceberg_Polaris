@@ -52,6 +52,26 @@ CREATE OR REPLACE EXTERNAL VOLUME EXT_VOL_POLARIS_S3
 SHOW EXTERNAL VOLUMES;
 ```
 
+### Create a Snowflake Open Catalog Account
+
+Select, Admin, Accounts, + Account and Create Snowflake Open Catalog Account
+
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/open_catalog.png">
+
+Follow the prompts to create the Snowflake Open Catalog Account, Admin User etc.
+
+### Create a Catalog in Polaris / Snowflake Open Catalog Account
+
+
+
+| Feild Name            | Value                                                      |
+| --------------------- | ---------------------------------------------------------- |
+| Name                  | POLARIS_CATALOG                                            |
+| External              | TRUE                                                       |
+| Default base location | StorageBaseUri from Cloudformation Outputs                 |
+| S3 role ARN           | SnowflakePolarisCatalogIAMRole from Cloudformation Outputs |
+
+
 ### To doo
 
 ```https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris_iam_update.yaml```
