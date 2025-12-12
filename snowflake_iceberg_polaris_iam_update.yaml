@@ -6,7 +6,7 @@ Parameters:
     
   PolarisCatalogExternalId:
     Type: String
-    Description: External Id from the POlaris catalog
+    Description: External Id from the Polaris catalog
 
   StorageIAMRole:
     Type: String
