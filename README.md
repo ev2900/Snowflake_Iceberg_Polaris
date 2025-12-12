@@ -171,3 +171,43 @@ Run the following SQL in Snowflake. Modify the database and shema name is necess
 ALTER DATABASE ICEBERG_POLARIS SET CATALOG_SYNC = 'OPEN_CATALOG_EXT_POLARIS';
 ALTER SCHEMA PUBLIC SET CATALOG_SYNC = 'OPEN_CATALOG_EXT_POLARIS';
 ```
+
+### Create an Iceberg table and insert sample data
+
+Run the following SQL in Snowflake to create the table
+
+```
+-- Step 5 | Create an Iceberg table
+CREATE OR REPLACE ICEBERG TABLE SAMPLEDATA_ICEBERG_HORIZON
+  CATALOG='SNOWFLAKE'
+  EXTERNAL_VOLUME='EXT_VOL_POLARIS_S3'
+(
+    quote_id        VARCHAR,
+    customer_id     VARCHAR,
+    premium_amount  DOUBLE,
+    status          STRING,
+    created_at      TIMESTAMP
+);
+
+```
+
+Run the following SQL in Snowflake to insert sample data
+
+```
+-- Step 6 | Insert sample data into the table
+INSERT INTO SAMPLEDATA_ICEBERG_HORIZON (
+    quote_id,
+    customer_id,
+    premium_amount,
+    status,
+    created_at
+)
+VALUES
+    ('Q-1001', 'CUST-001', 125.50, 'PENDING',     '2025-01-10 14:23:00'),
+    ('Q-1002', 'CUST-002', 210.75, 'APPROVED',   '2025-01-11 09:15:22'),
+    ('Q-1003', 'CUST-003', 340.00, 'REJECTED',   '2025-01-12 16:42:10'),
+    ('Q-1004', 'CUST-001', 180.25, 'PENDING',    '2025-01-13 11:05:47'),
+    ('Q-1005', 'CUST-004', 295.99, 'APPROVED',   '2025-01-14 08:33:19');
+```
+
+
