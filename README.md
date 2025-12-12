@@ -62,16 +62,30 @@ Follow the prompts to create the Snowflake Open Catalog Account, Admin User etc.
 
 ### Create a Catalog in Polaris / Snowflake Open Catalog Account
 
+Select Catalogs, Create Catalog
 
+In the input field that appears enter the following values
 
-| Feild Name            | Value                                                      |
+| Field Name            | Value                                                      |
 | --------------------- | ---------------------------------------------------------- |
 | Name                  | POLARIS_CATALOG                                            |
 | External              | TRUE                                                       |
 | Default base location | StorageBaseUri from Cloudformation Outputs                 |
 | S3 role ARN           | SnowflakePolarisCatalogIAMRole from Cloudformation Outputs |
 
+The input form should look something like this 
 
-### To doo
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/polaris_catalog.png">
+
+### Update IAM roles tp allow Snowflake and Polaris to assume them
+
+Before you can use the external volume and polaris can connect to Snowflake to Polaris, you need to update the IAM role Snowflake and Polaris will use.
+
+To updae the IAM role you will deploy a stack update to the CloudFormation tempalte.
+
+Begin by selecting the CloudFormation stack and then Update stack, Make a direct update
+
+
 
 ```https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris_iam_update.yaml```
+
