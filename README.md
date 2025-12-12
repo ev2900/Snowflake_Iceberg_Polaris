@@ -85,7 +85,10 @@ To updae the IAM role you will deploy a stack update to the CloudFormation tempa
 
 Begin by selecting the CloudFormation stack and then Update stack, Make a direct update
 
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/stack_update.png">
 
+Then select Replace existing tempalte and copy paste the following S3 URL
 
 ```https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris_iam_update.yaml```
 
+On the next page you will be asked for several inputs. Run the following SQL in Snowflake to get each input paramater
