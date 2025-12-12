@@ -38,6 +38,7 @@ The values of any of the <...> place holders can be found in the output section 
 Update the run the following SQL in Snowflake.
 
 ```
+--  Step 1 | Create external volume to link S3 bucket with Snowflake
 CREATE OR REPLACE EXTERNAL VOLUME EXT_VOL_POLARIS_S3
    STORAGE_LOCATIONS =
       (
@@ -92,3 +93,58 @@ Then select Replace existing tempalte and copy paste the following S3 URL
 ```https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris_iam_update.yaml```
 
 On the next page you will be asked for several inputs. Run the following SQL in Snowflake to get each input paramater
+
+STORAGE_AWS_EXTERNAL_ID and STORAGE_AWS_IAM_USER_ARN
+
+```
+-- Step 2 | Get STORAGE_AWS_EXTERNAL_ID and STORAGE_AWS_IAM_USER_ARN to update IAM role
+DESC EXTERNAL VOLUME EXT_VOL_POLARIS_S3;
+
+SELECT
+   parse_json("property_value"):STORAGE_AWS_EXTERNAL_ID::string AS storage_aws_external_id,
+	parse_json("property_value"):STORAGE_AWS_IAM_USER_ARN::string AS storage_aws_iam_user_arn
+FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
+WHERE "property" = 'STORAGE_LOCATION_1';
+```
+
+PolarisCatalogExternalId and PolarisCatalogIAMRole
+
+Via. the Snowflake Open Catalog account web page select the database you created. 
+
+On this screen you will see the External ID and IAM user ARN 
+
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/polaris_info.png">
+
+The parameters page on the CloudFormation stack update should look like this 
+
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/stack_update_2.png">
+
+### Create a Polaris connection 
+
+Select Connections, +Connection
+
+Name the catalog ```CATALOG_CONNECTION```, select Create new principal role, Name the new principal ```CATALOG_PRINCIPAL```
+
+<img width="500" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/create_catalog.png">
+
+### Create a catalog integration for Polaris
+
+Update and run the following SQL in Snowflake.
+
+```
+-- Step 3 | Create catatalog intergration
+CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS 
+  CATALOG_SOURCE=POLARIS 
+  TABLE_FORMAT=ICEBERG 
+  REST_CONFIG = (
+    CATALOG_URI = 'https://<first-part-of-catalog-url>/polaris/api/catalog' -- https://uwtkikf-iceberg_open_catalog.snowflakecomputing.com/polaris/api/catalog
+    CATALOG_NAME = 'POLARIS_CATALOG'
+  )
+  REST_AUTHENTICATION = (
+    TYPE = OAUTH 
+    OAUTH_CLIENT_ID = '<>' 
+    OAUTH_CLIENT_SECRET = '<>' 
+    OAUTH_ALLOWED_SCOPES = ('PRINCIPAL_ROLE:ALL') 
+  ) 
+  ENABLED=TRUE;
+```
