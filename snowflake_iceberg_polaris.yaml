@@ -270,6 +270,33 @@ Resources:
                   - '*'
                 Resource: '*'
 
+  #
+  # Lake Formation Connection Role
+  #
+  LakeFormationIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: "lakeformation.amazonaws.com" 
+            Action: sts:AssumeRole
+          - Effect: Allow
+            Principal:
+              Service: "glue.amazonaws.com" 
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: Admin
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - '*'
+                Resource: '*'
+
 Outputs:
   SnowflakePolarisCatalogIAMRole:
     Description: Use this for s3 role ARN when creating the catalog in Polaris
@@ -286,3 +313,7 @@ Outputs:
       - - 's3://'
         - !Ref S3
         - '/iceberg/'
+
+  LakeFormationIAMRole:
+    Description: Use this for <lake-formation-IAM-role-ARN> value when creating the LakeFormation catalog federation via. the AWS CLI
+    Value: !GetAtt LakeFormationIAMRole.Arn
