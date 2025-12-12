@@ -25,12 +25,33 @@ You can test this integration. Begin by deploying the CloudFormation stack below
 
 Navigate to the Glue console ETL jobs page, select the Create Iceberg Table and select the Run button
 
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/run_glue_job.png">
 
+### Create a catalog integration in Snowflake
 
+Update and run the following SQL in Snowflake.
 
+The values of any of the <...> place holders can be found in the output section of the CloudFormation stack
 
+<img width="700" alt="quick_setup" src="
 
+Update the run the following SQL in Snowflake.
 
-###
+```
+CREATE OR REPLACE EXTERNAL VOLUME EXT_VOL_POLARIS_S3
+   STORAGE_LOCATIONS =
+      (
+         (
+            NAME = 'S3-ICEBERG-EXTERNAL-VOLUME'
+            STORAGE_PROVIDER = 'S3'
+            STORAGE_BASE_URL = '<>' 
+            STORAGE_AWS_ROLE_ARN = '<>'
+         )
+      );
+
+SHOW EXTERNAL VOLUMES;
+```
+
+### To doo
 
 ```https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris_iam_update.yaml```
