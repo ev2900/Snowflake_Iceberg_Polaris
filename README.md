@@ -12,7 +12,7 @@ The architecture below depicts this
 
 <img width="900" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/Architecture.png">
 
-## Example
+# Example
 
 You can test this integration. Begin by deploying the CloudFormation stack below. This will create the required AWS resources.
 
@@ -20,6 +20,8 @@ You can test this integration. Begin by deploying the CloudFormation stack below
 > The CloudFormation stack creates IAM role(s) that have ADMIN permissions. This is not appropriate for production deployments. Scope these roles down before using this CloudFormation in production.
 
 [![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=snowflake-iceberg-polaris&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris.yaml)
+
+## Snowflake / Snowflake Open Catalaog Account (Polaris) Set Up
 
 ### Create a sample Iceberg table in AWS via. Glue
 
@@ -210,4 +212,9 @@ VALUES
     ('Q-1005', 'CUST-004', 295.99, 'APPROVED',   '2025-01-14 08:33:19');
 ```
 
+This will create an Iceberg table that is registerd with Horizon but also is represented in the Snowflake Open Catalog Account
+
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/polaris_table.png">
+
+## Lake Formation / Glue Data Catalog Federation Set Up
 
