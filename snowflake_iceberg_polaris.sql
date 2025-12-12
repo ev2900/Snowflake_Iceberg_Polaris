@@ -40,13 +40,11 @@ CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS
   ) 
   ENABLED=TRUE;
 
+-- Step 4 | Set database sync with Polaris catalog
+ALTER DATABASE ICEBERG_POLARIS SET CATALOG_SYNC = 'OPEN_CATALOG_EXT_POLARIS'; -- Change database name if you are not using a different DB
+ALTER SCHEMA PUBLIC SET CATALOG_SYNC = 'OPEN_CATALOG_EXT_POLARIS'; -- Change the schema name if you are not using the public schema
 
---
---
---
-ALTER DATABASE ICEBERG_POLARIS SET CATALOG_SYNC = 'OPEN_CATALOG_EXT_POLARIS';
-
---
+-- Step 5 | Create an Iceberg table
 CREATE OR REPLACE ICEBERG TABLE SAMPLEDATA_ICEBERG_HORIZON
   CATALOG='SNOWFLAKE'
   EXTERNAL_VOLUME='EXT_VOL_POLARIS_S3'
@@ -58,6 +56,7 @@ CREATE OR REPLACE ICEBERG TABLE SAMPLEDATA_ICEBERG_HORIZON
     created_at      TIMESTAMP
 );
 
+-- Step 6 | Insert sample data into the table
 INSERT INTO SAMPLEDATA_ICEBERG_HORIZON (
     quote_id,
     customer_id,
