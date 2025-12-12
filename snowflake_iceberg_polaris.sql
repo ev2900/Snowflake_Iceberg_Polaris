@@ -1,7 +1,7 @@
---
+-- Optional create a new database
 CREATE DATABASE ICEBERG_POLARIS
 
---
+--  Step 1 | Create external volume to link S3 bucket with Snowflake
 CREATE OR REPLACE EXTERNAL VOLUME EXT_VOL_POLARIS_S3
    STORAGE_LOCATIONS =
       (
