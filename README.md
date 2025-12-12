@@ -21,4 +21,16 @@ You can test this integration. Begin by deploying the CloudFormation stack below
 
 [![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=snowflake-iceberg-polaris&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris.yaml)
 
+### Create a sample Iceberg table in AWS via. Glue
+
+Navigate to the Glue console ETL jobs page, select the Create Iceberg Table and select the Run button
+
+
+
+
+
+
+
+###
+
 ```https://sharkech-public.s3.amazonaws.com/misc-public/snowflake_iceberg_polaris_iam_update.yaml```
