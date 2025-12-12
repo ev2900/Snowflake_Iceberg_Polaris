@@ -15,15 +15,18 @@ CREATE OR REPLACE EXTERNAL VOLUME EXT_VOL_POLARIS_S3
 
 SHOW EXTERNAL VOLUMES;
 
---
+-- Step 2 | 
 DESC EXTERNAL VOLUME EXT_VOL_POLARIS_S3;
 
 SELECT
-	parse_json("property_value"):STORAGE_AWS_IAM_USER_ARN::string AS storage_aws_iam_user_arn,
-    parse_json("property_value"):STORAGE_AWS_EXTERNAL_ID::string AS storage_aws_external_id
+   parse_json("property_value"):STORAGE_AWS_EXTERNAL_ID::string AS storage_aws_external_id,
+	parse_json("property_value"):STORAGE_AWS_IAM_USER_ARN::string AS storage_aws_iam_user_arn
 FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
 WHERE "property" = 'STORAGE_LOCATION_1';
 
+
+--
+--
 --
 CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS 
   CATALOG_SOURCE=POLARIS 
