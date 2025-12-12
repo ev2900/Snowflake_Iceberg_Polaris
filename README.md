@@ -33,7 +33,7 @@ Update and run the following SQL in Snowflake.
 
 The values of any of the <...> place holders can be found in the output section of the CloudFormation stack
 
-<img width="700" alt="quick_setup" src="
+**<img width="700" alt="quick_setup" src="**
 
 Update the run the following SQL in Snowflake.
 
