@@ -239,6 +239,29 @@ The aws CLI will return the ARN of the secret. Copy this down, you will need it 
 ### Create Lake Formation catalog federation connection
 
 ```
-
+aws glue create-connection --region us-west-2 --connection-input '{
+	"Name": "SnowflakeConnection",
+	"ConnectionType": "SNOWFLAKEICEBERGRESTCATALOG",
+	"ConnectionProperties": {
+ 		"ROLE_ARN": "<lake-formation-IAM-role-ARN>",
+ 		"CATALOG_CASING_FILTER": "UPPERCASE_ONLY",
+ 		"TABLE_DEPTH": "4",
+ 		"INSTANCE_URL": "https://<first-part-of-catalog-url>.snowflakecomputing.com/polaris/api/catalog"
+ 	},
+ 	"AuthenticationConfiguration": {
+ 		"AuthenticationType": "OAUTH2",
+ 		"SecretArn": "<secret-manager-arn-from-previous-step>",
+ 		"OAuth2Properties": {
+ 			"OAuth2GrantType": "CLIENT_CREDENTIALS",
+ 			"OAuth2ClientApplication": {
+ 				"UserManagedClientApplicationClientId": "<client-id>"
+ 			},
+ 			"TokenUrl": "https://<first-part-of-catalog-url>.snowflakecomputing.com/polaris/api/catalog/v1/oauth/tokens",
+ 			"TokenUrlParametersMap": {
+ 				"scope": "PRINCIPAL_ROLE:ALL"
+ 			}
+ 		}
+ 	}
+}'
 ```
 
