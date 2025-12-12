@@ -24,16 +24,13 @@ SELECT
 FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
 WHERE "property" = 'STORAGE_LOCATION_1';
 
-
---
---
---
+-- Step 3 | Create catatalog intergration
 CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS 
   CATALOG_SOURCE=POLARIS 
   TABLE_FORMAT=ICEBERG 
   REST_CONFIG = (
-    CATALOG_URI = '<>' 
-    CATALOG_NAME = '<>'
+    CATALOG_URI = 'https://<first-part-of-catalog-url>/polaris/api/catalog' -- https://uwtkikf-iceberg_open_catalog.snowflakecomputing.com/polaris/api/catalog
+    CATALOG_NAME = 'POLARIS_CATALOG'
   )
   REST_AUTHENTICATION = (
     TYPE = OAUTH 
@@ -43,6 +40,9 @@ CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS
   ) 
   ENABLED=TRUE;
 
+
+--
+--
 --
 ALTER DATABASE ICEBERG_POLARIS SET CATALOG_SYNC = 'OPEN_CATALOG_EXT_POLARIS';
 
