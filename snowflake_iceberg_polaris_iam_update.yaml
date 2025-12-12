@@ -306,3 +306,7 @@ Outputs:
       - ''
       - - 's3://'
         - !Ref S3
+
+  LakeFormationIAMRole:
+    Description: Use this for <lake-formation-IAM-role-ARN> value when creating the LakeFormation catalog federation via. the AWS CLI
+    Value: !GetAtt LakeFormationIAMRole.Arn
