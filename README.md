@@ -151,4 +151,10 @@ CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS
   ENABLED=TRUE;
 ```
 
-### 
+### Create Snowflake Open Catalog Role and Grant to Principle 
+
+Select Catalogs, + Catalog Role
+
+Name the role ```ADMIN```. For testing purposes you can assigned the role all privileges.
+
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/catalog_role.png">
