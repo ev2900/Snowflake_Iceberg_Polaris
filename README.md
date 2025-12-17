@@ -1,8 +1,8 @@
 # Snowflake Iceberg Polaris (Snowflake Open Catalog Account)
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-6-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-122-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-002-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-6-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-421-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-002-green">
 
-Apache Polaris is an open-source metadata catalog for Apache Iceberg. Snowflake offers a managed implementation of Polaris via. a Snowflake Open Catalog Account. 
+Apache Polaris is an open-source metadata catalog for Apache Iceberg. Snowflake offers a managed implementation of Polaris via. a Snowflake Open Catalog Account.
 
 Iceberg tables that are created and registered with Horizon can be sync'd with Polaris via. a catalog integration and a database / schema sync in Horizon.
 
@@ -47,7 +47,7 @@ CREATE OR REPLACE EXTERNAL VOLUME EXT_VOL_POLARIS_S3
          (
             NAME = 'S3-ICEBERG-EXTERNAL-VOLUME'
             STORAGE_PROVIDER = 'S3'
-            STORAGE_BASE_URL = '<>' 
+            STORAGE_BASE_URL = '<>'
             STORAGE_AWS_ROLE_ARN = '<>'
          )
       );
@@ -76,7 +76,7 @@ In the input field that appears enter the following values
 | Default base location | StorageBaseUri from Cloudformation Outputs                 |
 | S3 role ARN           | SnowflakePolarisCatalogIAMRole from Cloudformation Outputs |
 
-The input form should look something like this 
+The input form should look something like this
 
 <img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/polaris_catalog.png">
 
@@ -111,17 +111,17 @@ WHERE "property" = 'STORAGE_LOCATION_1';
 
 PolarisCatalogExternalId and PolarisCatalogIAMRole
 
-Via. the Snowflake Open Catalog account web page select the database you created. 
+Via. the Snowflake Open Catalog account web page select the database you created.
 
-On this screen you will see the External ID and IAM user ARN 
+On this screen you will see the External ID and IAM user ARN
 
 <img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/polaris_info.png">
 
-The parameters page on the CloudFormation stack update should look like this 
+The parameters page on the CloudFormation stack update should look like this
 
 <img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/stack_update_2.png">
 
-### Create a Polaris connection 
+### Create a Polaris connection
 
 Select Connections, +Connection
 
@@ -137,23 +137,23 @@ Update and run the following SQL in Snowflake.
 
 ```
 -- Step 3 | Create catatalog intergration
-CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS 
-  CATALOG_SOURCE=POLARIS 
-  TABLE_FORMAT=ICEBERG 
+CREATE OR REPLACE CATALOG INTEGRATION OPEN_CATALOG_EXT_POLARIS
+  CATALOG_SOURCE=POLARIS
+  TABLE_FORMAT=ICEBERG
   REST_CONFIG = (
     CATALOG_URI = 'https://<first-part-of-catalog-url>/polaris/api/catalog' -- https://uwtkikf-iceberg_open_catalog.snowflakecomputing.com/polaris/api/catalog
     CATALOG_NAME = 'POLARIS_CATALOG'
   )
   REST_AUTHENTICATION = (
-    TYPE = OAUTH 
-    OAUTH_CLIENT_ID = '<>' 
-    OAUTH_CLIENT_SECRET = '<>' 
-    OAUTH_ALLOWED_SCOPES = ('PRINCIPAL_ROLE:ALL') 
-  ) 
+    TYPE = OAUTH
+    OAUTH_CLIENT_ID = '<>'
+    OAUTH_CLIENT_SECRET = '<>'
+    OAUTH_ALLOWED_SCOPES = ('PRINCIPAL_ROLE:ALL')
+  )
   ENABLED=TRUE;
 ```
 
-### Create Snowflake Open Catalog Role and Grant to Principle 
+### Create Snowflake Open Catalog Role and Grant to Principle
 
 Select Catalogs, + Catalog Role
 
@@ -165,7 +165,7 @@ Next you need to grant the ADMIN role to the CATALOG_PRINCIPLE you created earli
 
 <img width="700" alt="quick_setup" src="https://github.com/ev2900/Snowflake_Iceberg_Polaris/blob/main/README/grant_catalog_role.png">
 
-### Set the database and/or schema sync to Polaris 
+### Set the database and/or schema sync to Polaris
 
 Run the following SQL in Snowflake. Modify the database and shema name is necessary
 
@@ -222,9 +222,9 @@ This will create an Iceberg table that is registerd with Horizon but also is rep
 
 To federate to the Snowflake Open Catalog Account, you need to store the client secret in AWS secret manager. For testing purposes you can use the same client secret value you used to create the catalog intergration in Snowflake.
 
-Replace the <> sections and run the following via. AWS CLI. 
+Replace the <> sections and run the following via. AWS CLI.
 
-*If you do not have an AWS CLI enviorment set up Cloudshell via. AWS console can be an easy to run these* 
+*If you do not have an AWS CLI enviorment set up Cloudshell via. AWS console can be an easy to run these*
 
 ```
 aws secretsmanager create-secret \
