@@ -1,6 +1,6 @@
 # Snowflake Iceberg Polaris (Snowflake Open Catalog Account)
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-6-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-421-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-011-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-6-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-392-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-011-green">
 
 Apache Polaris is an open-source metadata catalog for Apache Iceberg. Snowflake offers a managed implementation of Polaris via. a Snowflake Open Catalog Account.
 
