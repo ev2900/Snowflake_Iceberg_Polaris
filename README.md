@@ -170,6 +170,7 @@ Next you need to grant the ADMIN role to the CATALOG_PRINCIPLE you created earli
 Run the following SQL in Snowflake. Modify the database and shema name is necessary
 
 ```
+-- Step 4 | Set database and schema sync
 ALTER DATABASE ICEBERG_POLARIS SET CATALOG_SYNC = 'OPEN_CATALOG_EXT_POLARIS';
 ALTER SCHEMA PUBLIC SET CATALOG_SYNC = 'OPEN_CATALOG_EXT_POLARIS';
 ```
@@ -238,6 +239,16 @@ The aws CLI will return the ARN of the secret. Copy this down, you will need it 
 
 ### Create Lake Formation catalog federation connection
 
+To create a Lake Formation catalog federation connection we need to create the connection. 
+
+Replace the <> sections and run the following via. AWS CLI.
+
+The ```<lake-formation-IAM-role-ARN>``` can be found in the CloudFormation stack outputs. 
+
+The other values that need to be replaced can be reused from previous steps.
+
+**Note** while you could also create this connection via. the AWS console UI, this method of deployment does not allow you to set the ```TABLE_DEPTH``` property to 4 (default is 3). A ```TABLE_DEPTH``` of 4 is requires when federating a connection via. a Snowflake Open Catalog Account.
+
 ```
 aws glue create-connection --region us-west-2 --connection-input '{
 	"Name": "SnowflakeConnection",
@@ -264,4 +275,3 @@ aws glue create-connection --region us-west-2 --connection-input '{
  	}
 }'
 ```
-
