@@ -1,10 +1,10 @@
 # Snowflake Iceberg Polaris (Snowflake Open Catalog Account)
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-6-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-392-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-014-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-6-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-397-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-014-green">
 
 > [!CAUTION]
 > This code sample is not fully functioning bc. of a limitation when creating the ```SNOWFLAKEICEBERGRESTCATALOG``` Glue connection.
-> 
+>
 > When creating a connection to Snowflake Open Catalog Account and/or Polaris the table depth property needs to be set to 4. Default value is 3.
 >
 > As of 12/21/2025 it is not possible to set this property via. the AWS CLI or console.
@@ -247,11 +247,11 @@ The aws CLI will return the ARN of the secret. Copy this down, you will need it 
 
 ### Create Lake Formation catalog federation connection
 
-To create a Lake Formation catalog federation connection we need to create the connection. 
+To create a Lake Formation catalog federation connection we need to create the connection.
 
 Replace the <> sections and run the following via. AWS CLI.
 
-The ```<lake-formation-IAM-role-ARN>``` can be found in the CloudFormation stack outputs. 
+The ```<lake-formation-IAM-role-ARN>``` can be found in the CloudFormation stack outputs.
 
 The other values that need to be replaced can be reused from previous steps.
 
