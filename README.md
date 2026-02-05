@@ -1,6 +1,6 @@
 # Snowflake Iceberg Polaris (Snowflake Open Catalog Account)
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-34-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-400-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-016-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-34-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-400-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-017-green">
 
 > [!CAUTION]
 > This code sample is not fully functioning bc. of a limitation when creating the ```SNOWFLAKEICEBERGRESTCATALOG``` Glue connection.
